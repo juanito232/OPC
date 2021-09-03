@@ -40,13 +40,17 @@ export default {
   methods: {
     login() {
       //this.user.password = this.encryptPassword(this.user.password);
-      Axios.post("localhost:3000/login",this.user).then(res=>{
-          if (res.code && res.code == 100){
+      Axios.post("http://localhost:3000/login/",this.user).then(res=>{
+        console.log(res.code);
+        console.log(res);
+          if (res.data.code == 100){
               this.$router.push({ name: 'Home' })
           }else{
+            console.log("usuario incorrecto",res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
           }
-      }).catch(()=>{
+      }).catch((err)=>{
+        console.log("Error",err);
             //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
       })
     },
