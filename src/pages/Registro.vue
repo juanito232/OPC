@@ -17,7 +17,7 @@
         </div>
         <div class="inputs">
           <label for="password"> Contraseña </label>
-          <q-input outlined v-model="user.password" />
+          <q-input outlined v-model="user.password" type="password"/>
         </div>
         <q-btn type="submit" class="btn-registrar" label="Registrarse" />
       </q-form>

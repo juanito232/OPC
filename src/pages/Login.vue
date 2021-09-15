@@ -15,7 +15,7 @@
         </div>
         <div class="inputs">
           <label for="password" class="estiloLabel"> Contraseña </label>
-          <q-input outlined v-model="user.password" bg-color="grey-1"/>
+          <q-input outlined v-model="user.password" bg-color="grey-1" type="password"/>
         </div>
         <q-btn type="submit" class="btn-registrar" label="Iniciar sesión" />
         <div>
