@@ -1,5 +1,7 @@
 <template>
-  <div>
+<q-layout
+    style="background: linear-gradient(90deg, rgba(37,37,37,1) 0%, rgba(100,223,223,0.6292892156862745) 100%, rgba(105,48,195,0.5032387955182073) 100%);"
+  >
     <img
       src="https://icon-library.com/images/accounting-icon/accounting-icon-1.jpg"
       alt=""
@@ -8,20 +10,20 @@
       <q-form action="" @submit.prevent="login">
         <h1>Login</h1>
         <div class="inputs">
-          <label for="email"> Usuario </label>
-          <q-input outlined v-model="user.email" />
+          <label for="email" class="estiloLabel"> Usuario </label>
+          <q-input outlined v-model="user.email" bg-color="grey-1"/>
         </div>
         <div class="inputs">
-          <label for="password"> Contraseña </label>
-          <q-input outlined v-model="user.password" />
+          <label for="password" class="estiloLabel"> Contraseña </label>
+          <q-input outlined v-model="user.password" bg-color="grey-1"/>
         </div>
         <q-btn type="submit" class="btn-registrar" label="Iniciar sesión" />
         <div>
-          <a href="#"> Registrarse </a>
+          <a href="#" @click="redireccionRegistro"> Registrarse </a>
         </div>
       </q-form>
     </div>
-  </div>
+</q-layout>
 </template>
 
 <script>
@@ -44,7 +46,7 @@ export default {
         console.log(res.code);
         console.log(res);
           if (res.data.code == 100){
-              this.$router.push({ name: 'Home' })
+              this.$router.push({ name: 'home' })
           }else{
             console.log("usuario incorrecto",res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
@@ -60,6 +62,9 @@ export default {
       const hash = shaObjt.getHash("HEX");
       return hash;
     },
+    redireccionRegistro(){
+      this.$router.push({name: 'registro'})
+    }
     /*notify (type, message, position) {
       this.$q.notify({
         type,
@@ -87,7 +92,7 @@ button {
   margin-top: 2em;
 }
 .inputs {
-  width: 35%;
+  width: 18%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -97,5 +102,10 @@ button {
 .btn-registrar {
   background-color: #6930c3;
   color: #ffffff;
+}
+.estiloLabel {
+  color: #fefefe;
+  font-size: 19px;
+  font-weight: bold;
 }
 </style>
