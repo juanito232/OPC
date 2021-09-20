@@ -1,14 +1,14 @@
 <template>
 <q-layout
-    style="background: linear-gradient(90deg, rgba(37,37,37,1) 0%, rgba(100,223,223,0.6292892156862745) 100%, rgba(105,48,195,0.5032387955182073) 100%);"
+    style="background: linear-gradient(90deg, rgba(144,111,195,1) 0%, rgba(100,223,223,0.6292892156862745) 100%, rgba(105,48,195,0.5032387955182073) 100%);"
   >
-    <img
-      src="https://icon-library.com/images/accounting-icon/accounting-icon-1.jpg"
+    <img class="estiloImagen"
+      src="@/assets/logoCerdito2.png"
       alt=""
     />
     <div class="form">
       <q-form action="" @submit.prevent="login">
-        <h1>Login</h1>
+        <h1 class="title">OPC</h1>
         <div class="inputs">
           <label for="email" class="estiloLabel"> Usuario </label>
           <q-input outlined v-model="user.email" bg-color="grey-1"/>
@@ -17,9 +17,12 @@
           <label for="password" class="estiloLabel"> Contraseña </label>
           <q-input outlined v-model="user.password" bg-color="grey-1" type="password"/>
         </div>
-        <q-btn type="submit" class="btn-registrar" label="Iniciar sesión" />
         <div>
-          <a href="#" @click="redireccionRegistro"> Registrarse </a>
+          <a href="#" class="estiloLink"> ¿Olvidó su contraseña? </a>
+        </div>
+        <div>
+          <q-btn type="submit" class="estiloButton" label="Iniciar sesión" />
+          <q-btn type="submit" class="estiloButton2" label="Registrarse" outline @click="redireccionRegistro"/>
         </div>
       </q-form>
     </div>
@@ -84,6 +87,10 @@ img {
 }
 .form {
   padding-top: 5em;
+  background-color: #fefefe;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 20px;
 }
 form div {
   padding-top: 2em;
@@ -92,20 +99,42 @@ button {
   margin-top: 2em;
 }
 .inputs {
-  width: 18%;
+  width: 35%;
   margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
 }
-.btn-registrar {
+.estiloButton {
   background-color: #6930c3;
   color: #ffffff;
+  margin: 5px;
+  margin-bottom: 2.5%;
+  box-shadow: 1px 1px 1px grey;
+}
+.estiloButton2 {
+  background-color: #ffffff;
+  color: #6930c3;
+  margin: 5px;
+  margin-bottom: 2.5%;
+  box-shadow: 1px 1px 1px grey;
 }
 .estiloLabel {
-  color: #fefefe;
+  color: #595959;
   font-size: 19px;
   font-weight: bold;
+  margin-right: 10px;
+}
+.title {
+  margin: 0 auto;
+}
+.estiloLink {
+  font-size: 17px;
+  text-decoration: none;
+}
+.estiloImagen {
+  margin-top: 35px;
+  margin-bottom: 20px;
 }
 </style>
