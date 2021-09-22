@@ -15,9 +15,9 @@
       <q-toolbar inset>
         <q-breadcrumbs active-color="white" style="font-size: 16px">
           <q-breadcrumbs-el label="Resumen" icon="home" />
-          <q-breadcrumbs-el label="Movimientos" icon="upgrade" />
-          <q-breadcrumbs-el label="Billeteras" icon=""/>
-          <q-breadcrumbs-el label="Estadisticas" icon="" />
+          <q-breadcrumbs-el label="Movimientos" icon="update" />
+          <q-breadcrumbs-el label="Billeteras" icon="account_balance_wallet"/>
+          <q-breadcrumbs-el label="Estadisticas" icon="auto_graph" />
         </q-breadcrumbs>
       </q-toolbar>
 
