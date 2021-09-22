@@ -14,5 +14,10 @@ export const routes = [
       path: '/registro',
       component: () => import('@/pages/Registro.vue'),
       name: 'registro'
-    }
+    },
+    {
+      path: '/lostPassword',
+      component: () => import('@/pages/LostPassword.vue'),
+      name: 'lostPassword',
+    }    
   ]

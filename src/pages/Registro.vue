@@ -8,18 +8,23 @@
     />
     <div class="form">
       <q-form action="" @submit.prevent="register">
-        <h1>Registro</h1>
+        <h1 class="estiloTitulo">Registro</h1>
         <div class="inputs">
-          <label for="name" class="estiloLabel"> Nombres </label>
-          <q-input outlined v-model="user.name" />
+          <label for="name" class="estiloLabel"> Nombre </label>
+          <q-input outlined v-model="user.name" lazy-rules :rules="[val =>(val && val.length > 1) || 'Por favor escriba su nombre.']"/>
         </div>
         <div class="inputs">
-          <label for="email" class="estiloLabel"> Usuario </label>
-          <q-input outlined v-model="user.email" />
+          <label for="email" class="estiloLabel"> Correo electrónico </label>
+          <q-input outlined v-model="user.email" lazy-rules :rules="[val=>emailValidation(val) || 'Correo inválido.']" />
         </div>
         <div class="inputs">
           <label for="password" class="estiloLabel"> Contraseña </label>
-          <q-input outlined v-model="user.password" type="password"/>
+          <q-input outlined v-model="user.password" lazy-rules :rules="[val=>mayusPasswordValidation(val) || 'La contraseña debe tener al menos una mayúscula.', 
+            val=>numPasswordValidation(val) || 'La contraseña debe tener al menos un número.', val=>lengthPasswordValidation(val) || 'La contraseña debe tener mínimo 6 caracteres.' ]" type="password"/>
+        </div>
+        <div class="inputs">
+          <label for="password" class="estiloLabel"> Confirmar contraseña </label>
+          <q-input outlined v-model="confirmPass" lazy-rules :rules="[val=>confirmPassword(val) || 'Las contraseñas no coinciden.']" type="password"/>
         </div>
         <q-btn type="submit" class="estiloButton" label="Registrarse" />
       </q-form>
@@ -38,9 +43,29 @@ export default {
         email: "",
         password: "",
       },
+      confirmPass: "",
     };
   },
   methods: {
+    numPasswordValidation(password) {
+      const numPattern = /[0-9]/
+      return numPattern.test(password)
+    },
+    lengthPasswordValidation(password) {
+      const lengthPattern = /.{6,}/
+      return lengthPattern.test(password)
+    },
+    mayusPasswordValidation(password) {
+      const mayusPattern = /[A-Z]/
+      return mayusPattern.test(password)
+    },
+    confirmPassword(password) {
+      return this.user.password.toString() === password.toString()
+    },
+    emailValidation(email) {
+      const emailPattern = /[a-z0-9]+(.[_a-z0-9]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,15})/i
+      return emailPattern.test(email)
+    },
     register() {
       //this.user.password = this.encryptPassword(this.user.password);
       Axios.post("http://localhost:3000/registry/", this.user)
@@ -50,7 +75,7 @@ export default {
           if (res.data.code == 100) {
             this.$router.push({ name: "login" });
           } else {
-            console.log("registro incorrecto", res);
+            console.log("Registro incorrecto", res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
           }
         })
@@ -69,7 +94,7 @@ img {
   height: 12em;
 }
 .form {
-  padding-top: 5em;
+  padding-top: 2px;
   background-color: #fefefe;
   margin-left: 25%;
   margin-right: 25%;
@@ -82,28 +107,31 @@ button {
   margin-top: 2em;
 }
 .inputs {
-  width: 35%;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
+  width: 30%;
+  text-align: start;
 }
 .estiloImagen {
-  margin-top: 35px;
+  margin-top: 30px;
   margin-bottom: 20px;
 }
 .estiloButton {
   background-color: #6930c3;
   color: #ffffff;
   margin: 5px;
-  margin-bottom: 2.5%;
+  margin-bottom: 3.5%;
   box-shadow: 1px 1px 1px grey;
+  margin-top: 30px;
 }
 .estiloLabel {
+  width: 30%;
   color: #595959;
   font-size: 19px;
   font-weight: bold;
   margin-right: 10px;
+}
+.estiloTitulo {
+  margin: 0 auto;
+  font-size: 65px;
 }
 </style>

@@ -11,6 +11,6 @@
 
 <script>
 export default {
-    name: 'home'
+    name: 'lostPassword'
 }
 </script>

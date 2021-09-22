@@ -8,9 +8,9 @@
     />
     <div class="form">
       <q-form action="" @submit.prevent="login">
-        <h1 class="title">OPC</h1>
+        <h1 class="estiloTitulo">OPC</h1>
         <div class="inputs">
-          <label for="email" class="estiloLabel"> Usuario </label>
+          <label for="email" class="estiloLabel"> Email </label>
           <q-input outlined v-model="user.email" bg-color="grey-1"/>
         </div>
         <div class="inputs">
@@ -18,7 +18,7 @@
           <q-input outlined v-model="user.password" bg-color="grey-1" type="password"/>
         </div>
         <div>
-          <a href="#" class="estiloLink"> ¿Olvidó su contraseña? </a>
+          <a href="#" class="estiloLink" outline @click="redireccionLostPassword"> ¿Olvidó su contraseña? </a>
         </div>
         <div>
           <q-btn type="submit" class="estiloButton" label="Iniciar sesión" />
@@ -67,6 +67,9 @@ export default {
     },
     redireccionRegistro(){
       this.$router.push({name: 'registro'})
+    },
+    redireccionLostPassword(){
+      this.$router.push({name: 'lostPassword'})
     }
     /*notify (type, message, position) {
       this.$q.notify({
@@ -99,12 +102,9 @@ button {
   margin-top: 2em;
 }
 .inputs {
-  width: 35%;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
+  width: 30%;
+  text-align: start;
 }
 .estiloButton {
   background-color: #6930c3;
@@ -126,8 +126,9 @@ button {
   font-weight: bold;
   margin-right: 10px;
 }
-.title {
+.estiloTitulo {
   margin: 0 auto;
+  font-size: 65px;
 }
 .estiloLink {
   font-size: 17px;
