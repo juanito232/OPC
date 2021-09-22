@@ -1,52 +1,44 @@
 <template>
-    <q-layout
-    style="background: linear-gradient(90deg, rgba(144,111,195,1) 0%, rgba(100,223,223,0.6292892156862745) 100%, rgba(105,48,195,0.5032387955182073) 100%);"
-  >
+    <q-layout>
   <div class="q-pa-md" >
-    <div class="bg-cyan text-white">
-      <q-toolbar>
-        <q-btn flat round dense icon="assignment_ind" />
-
-        <q-toolbar-title>OPC</q-toolbar-title>
-
-        <q-btn flat round dense icon="sim_card" class="q-mr-xs" />
-        <q-btn flat round dense icon="gamepad" />
-      </q-toolbar>
-      <q-toolbar inset>
-        <q-breadcrumbs active-color="white" style="font-size: 16px">
-          <q-breadcrumbs-el label="Resumen" icon="home" />
-          <q-breadcrumbs-el label="Movimientos" icon="update" />
-          <q-breadcrumbs-el label="Billeteras" icon="account_balance_wallet"/>
-          <q-breadcrumbs-el label="Estadisticas" icon="auto_graph" />
-        </q-breadcrumbs>
-      </q-toolbar>
-
-    </div>
+    <q-header elevated class="bg-black">
+    <Toolbar/>
+    </q-header>
   </div>
   
-  <div class="q-pa-md" style="padding-top: 38%" >
-        <div class="row justify-end">
+   <Drawer/>
 
-      <q-fab
-        v-model="fabRight"
-        vertical-actions-align="right"
-        color="primary"
-        glossy
-        icon="keyboard_arrow_up"
-        direction="up"
-      >
-        <q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" />
-        <q-fab-action label-position="left" color="red" @click="onClick" icon="mood_bad" label="Gastos" />
-      </q-fab>
-       </div>
-   </div>
+   <q-page-container>
+        <q-page class="q-px-lg q-py-md">
+          <slot></slot>
+          <q-page-sticky position="bottom-right" :offset="[18, 18]">
+            <q-fab
+              v-model="fabRight"
+              vertical-actions-align="right"
+              color="deep-purple-6"
+              
+              icon="keyboard_arrow_up"
+              direction="up">
+              <q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" />
+              <q-fab-action label-position="left" color="red" @click="onClick" icon="mood_bad" label="Gastos" />
+            </q-fab>
+          </q-page-sticky>
+        </q-page>
+      </q-page-container>
 
     </q-layout>
   </template>
 
 <script>
   import { ref } from 'vue'
+  import Toolbar from '../components/Toolbar.vue'
+  import Drawer from '../components/Drawer.vue'
+
     export default {  
+      components:{
+        Toolbar,
+        Drawer
+      },
       setup () {
         return {
           fabLeft: ref(true),
