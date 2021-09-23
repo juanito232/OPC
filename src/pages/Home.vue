@@ -24,7 +24,6 @@
           </q-page-sticky>
         </q-page>
       </q-page-container>
-
     </q-layout>
   </template>
 
@@ -51,6 +50,3 @@
 }
 </script>
 
-<style lang="sass" scoped >
-
-</style>

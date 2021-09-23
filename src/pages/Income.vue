@@ -30,7 +30,7 @@ import Home from '../pages/Home.vue'
 /*import Axios from "axios";*/
 
 export default {
-    name:'Income',
+    name:'income',
           components: {
             Home
         },  

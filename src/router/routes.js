@@ -6,6 +6,11 @@ export const routes = [
       name: 'Home-Content'
     },
     {
+        component: () => import('@/pages/Summary.vue'),
+      alias: '/',
+      name: 'summary'
+    },
+    {
       path: '/login',
       component: () => import('@/pages/Login.vue'),
       name: 'login'
@@ -44,5 +49,10 @@ export const routes = [
       path: '/income',
       component: () => import('@/pages/Income.vue'),
       name: 'income'      
+    },
+    {
+      path: '/requestPassword',
+      component: () => import('@/pages/RequestPassword.vue'),
+      name: 'requestPassword'      
     }
   ]

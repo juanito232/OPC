@@ -7,7 +7,7 @@
 <script>
 import Home from '../pages/Home.vue'
 export default {
-    name:'Movements',
+    name:'movements',
     components:{
         Home
     }

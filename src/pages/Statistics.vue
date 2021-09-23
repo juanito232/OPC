@@ -7,7 +7,7 @@
 <script>
 import Home from '../pages/Home.vue'
 export default {
-    name:'Statistics',
+    name:'statistics',
     components:{
         Home
     }
