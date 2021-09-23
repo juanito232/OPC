@@ -5,21 +5,21 @@
       <h1 class="estiloTitulo">Ingresos</h1>
       <div class="inputs">
         <label for="name" class="estiloLabel"> Nombre </label>
-        <q-input outlined v-model="name" />
+        <q-input outlined v-model="income.name" />
       </div>
       <div class="inputs">
         <label for="value" class="estiloLabel"> Valor </label>
-        <q-input outlined v-model="name" />
+        <q-input outlined v-model="income.value" />
       </div>
       <div class="inputs">
         <label for="date" class="estiloLabel"> Fecha </label>
-        <q-input outlined v-model="name" />
+        <q-input outlined v-model="income.date" />
       </div>
       <div class="estiloDescripcion">
         <label for="description" class="estiloLabel"> Descripción </label>
-        <q-input outlined v-model="name" />
+        <q-input outlined v-model="income.description" />
       </div>
-      <q-btn type="submit" class="estiloButton" label="Guardar" />
+      <q-btn type="submit" class="estiloButton" label="Guardar" @click="save" />
     </q-form>
       </div>
   </home>
@@ -27,7 +27,7 @@
 
 <script>
 import Home from '../pages/Home.vue'
-/*import Axios from "axios";*/
+import Axios from "axios";
 
 export default {
     name:'income',
@@ -44,6 +44,23 @@ export default {
             },
         }
      },
+     methods:{
+       save(){
+         console.log("Id del usuario: "+this.$route.params.id);
+         Axios.post('http://localhost:3000/addIncome/',{userId:this.$route.params.id,...this.income}).then(res=>{
+                console.log(res.code);
+                console.log(res);
+                if (res.data.code == 100){
+                    console.log("OK");
+                    this.$router.push({name:'Home-Content',params:{userId:this.$route.params.id}})
+                }else{
+                    console.log("Error",res);
+                }
+            }).catch((err)=>{
+                    console.log("Error",err);
+            })
+       }
+     }
 }
 
 </script>

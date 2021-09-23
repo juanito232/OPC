@@ -1,6 +1,15 @@
 <template>
     <home>
-        <div v-for="income in incomes" :key="income.id">{{income}}</div>
+        <h2>Ingresos</h2>
+        <div v-for="income in incomes" :key="income.id">
+            <q-card dark bordered class="estiloCard">
+                <q-card-section>
+                <div class="text-h6">Nombre: {{income.name}}</div>
+                <div class="text-subtitle2"> Valor: {{income.value}} </div>
+                </q-card-section>
+                
+            </q-card>
+        </div>
     </home>
 </template>
 
@@ -18,12 +27,12 @@ export default {
         Home
     },
     beforeMount(){
-        console.log(this.$route.params.id);
-        //this.getIncomes()
+        console.log("parametro:",this.$route.params.id)
+        this.getIncomes()
     },
     methods:{
         getIncomes(){
-            Axios.get('http://localhost:3000/getIncomes',this.$route.params.id).then(res=>{
+            Axios.get('http://localhost:3000/getIncomes/'+this.$route.params.id).then(res=>{
                 console.log(res.code);
                 console.log(res);
                 if (res.data.code == 100){
@@ -39,3 +48,15 @@ export default {
     }
 }
 </script>
+
+<style>
+.estiloCard {
+  background-color: #6930c3;
+  color: white;
+  width: 100%;
+  max-width: 250px;
+  margin-left: 3.5%;
+  display: inline-block;
+  padding: 20px;
+}
+</style>

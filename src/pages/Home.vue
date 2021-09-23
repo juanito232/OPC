@@ -18,7 +18,7 @@
               color="deep-purple-6"
               icon="keyboard_arrow_up"
               direction="up">
-              <router-link to="/income"><q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" /></router-link>
+              <router-link :to="{name:'income',params:{id:this.$route.params.id}}" ><q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" /></router-link>
               <router-link to="/expenses"><q-fab-action label-position="left" color="red" @click="onClick" icon="mood_bad" label="Gastos" /></router-link>
             </q-fab>
           </q-page-sticky>
