@@ -2,7 +2,7 @@
     <home>
         <h2>Ingresos</h2>
         <div v-for="income in incomes" :key="income.id">
-            <q-card dark bordered class="estiloCard">
+            <q-card dark bordered class="estiloCard" >
                 <q-card-section>
                 <div class="text-h6">Nombre: {{income.name}}</div>
                 <div class="text-subtitle2"> Valor: {{income.value}} </div>
@@ -24,7 +24,7 @@ export default {
     },
     name:'Home-Content',
     components:{
-        Home
+            Home
     },
     beforeMount(){
         console.log("parametro:",this.$route.params.id)
@@ -32,7 +32,7 @@ export default {
     },
     methods:{
         getIncomes(){
-            Axios.get('http://localhost:3000/getIncomes/'+this.$route.params.id).then(res=>{
+            Axios.get('http://localhost:3000/getIncome/'+this.$route.params.id).then(res=>{
                 console.log(res.code);
                 console.log(res);
                 if (res.data.code == 100){

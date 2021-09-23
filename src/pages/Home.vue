@@ -37,8 +37,12 @@
       Toolbar,
       Drawer
     },
+    /*data(){
+       id:  this.$route.params.id   
+     },*/
     setup () {
       return {
+
         fabLeft: ref(true),
         fabCenter: ref(true),
         fabRight: ref(true),

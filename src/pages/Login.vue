@@ -11,11 +11,12 @@
         <h1 class="estiloTitulo">OPC</h1>
         <div class="inputs">
           <label for="email" class="estiloLabel"> Correo electrónico </label>
-          <q-input outlined v-model="user.email" bg-color="grey-1"/>
+          <q-input outlined v-model="user.email" bg-color="grey-1" lazy-rules :rules="[val=>emailValidation(val) || 'Correo inválido.']"/>
         </div>
         <div class="inputs">
           <label for="password" class="estiloLabel"> Contraseña </label>
-          <q-input outlined v-model="user.password" bg-color="grey-1" type="password"/>
+          <q-input outlined v-model="user.password" bg-color="grey-1" type="password" lazy-rules :rules="[val=>mayusPasswordValidation(val) || 'La contraseña debe tener al menos una mayúscula.', 
+            val=>numPasswordValidation(val) || 'La contraseña debe tener al menos un número.', val=>lengthPasswordValidation(val) || 'La contraseña debe tener mínimo 6 caracteres.' ]" />
         </div>
         <div>
           <a href="#" class="estiloLink" outline @click="redireccionLostPassword"> ¿Olvidó su contraseña? </a>
@@ -50,7 +51,8 @@ export default {
         console.log(res.code);
         console.log(res);
           if (res.data.code == 100){
-              this.$router.push({name:'Home-Content',params:{id:res.data.data.id}})
+              this.$router.push({name:'Home-Content',params:{id: res.data.data.id}})
+              this.id= res.data.data.id
           }else{
             console.log("usuario incorrecto",res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
@@ -71,7 +73,23 @@ export default {
     },
     redireccionLostPassword(){
       this.$router.push({name: 'lostPassword'})
-    }
+    },
+    numPasswordValidation(password) {
+      const numPattern = /[0-9]/
+      return numPattern.test(password)
+    },
+    lengthPasswordValidation(password) {
+      const lengthPattern = /.{6,}/
+      return lengthPattern.test(password)
+    },
+    mayusPasswordValidation(password) {
+      const mayusPattern = /[A-Z]/
+      return mayusPattern.test(password)
+    },
+    emailValidation(email) {
+      const emailPattern = /[a-z0-9]+(.[_a-z0-9]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,15})/i
+      return emailPattern.test(email)
+    },
     /*notify (type, message, position) {
       this.$q.notify({
         type,

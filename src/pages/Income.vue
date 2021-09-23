@@ -1,7 +1,7 @@
 <template>
   <home>
       <div>
-    <q-form action="" @submit.prevent="Income">
+    <q-form action="" @submit.prevent="income">
       <h1 class="estiloTitulo">Ingresos</h1>
       <div class="inputs">
         <label for="name" class="estiloLabel"> Nombre </label>
@@ -37,22 +37,22 @@ export default {
         data() {
         return {
             income: {
+                userId: this.$route.params.id,
                 name: "",
                 value: "",
                 date: "",
-                description: "",
             },
         }
      },
      methods:{
        save(){
          console.log("Id del usuario: "+this.$route.params.id);
-         Axios.post('http://localhost:3000/addIncome/',{userId:this.$route.params.id,...this.income}).then(res=>{
+         Axios.post('http://localhost:3000/addIncome/',this.income).then(res=>{
                 console.log(res.code);
                 console.log(res);
                 if (res.data.code == 100){
                     console.log("OK");
-                    this.$router.push({name:'Home-Content',params:{userId:this.$route.params.id}})
+                    this.$router.push({name:'Home-Content', params:{id: res.data.data.userId}})
                 }else{
                     console.log("Error",res);
                 }
