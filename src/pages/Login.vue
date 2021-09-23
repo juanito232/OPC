@@ -34,9 +34,15 @@ import JsSHA from "jssha";
 import Axios from "axios";
 export default {
   name: "login",
+  provide(){
+      return {
+        u:1
+      }
+  },
   data() {
     return {
       user: {
+        id: 0,
         email: null ,
         password: null ,
       },
@@ -49,7 +55,8 @@ export default {
         console.log(res.code);
         console.log(res);
           if (res.data.code == 100){
-              this.$router.push({ name: 'summary' })
+              this.$route.params.id = res.data.data.id; 
+              this.$router.push('summary')
           }else{
             console.log("usuario incorrecto",res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
