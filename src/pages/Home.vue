@@ -31,7 +31,6 @@
   import { ref } from 'vue'
   import Toolbar from '../components/Toolbar.vue'
   import Drawer from '../components/Drawer.vue'
-
   export default {  
     name: 'home',
     components:{
