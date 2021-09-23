@@ -33,6 +33,7 @@
   import Drawer from '../components/Drawer.vue'
 
   export default {  
+    name: 'home',
     components:{
       Toolbar,
       Drawer

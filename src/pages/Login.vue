@@ -49,7 +49,7 @@ export default {
         console.log(res.code);
         console.log(res);
           if (res.data.code == 100){
-              this.$router.push({ name: 'home' })
+              this.$router.push({ name: 'summary' })
           }else{
             console.log("usuario incorrecto",res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
