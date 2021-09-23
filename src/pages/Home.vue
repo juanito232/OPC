@@ -16,7 +16,6 @@
               v-model="fabRight"
               vertical-actions-align="right"
               color="deep-purple-6"
-              
               icon="keyboard_arrow_up"
               direction="up">
               <router-link to="/income"><q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" /></router-link>
@@ -33,7 +32,6 @@
   import { ref } from 'vue'
   import Toolbar from '../components/Toolbar.vue'
   import Drawer from '../components/Drawer.vue'
-
   export default {  
     components:{
       Toolbar,

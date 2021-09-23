@@ -1,9 +1,9 @@
 export const routes = [
     {
       path: '/home',
-      component: () => import('@/pages/Home.vue'),
+      component: () => import('@/pages/HomeContent.vue'),
       alias: '/',
-      name: 'home'
+      name: 'Home-Content'
     },
     {
       path: '/login',
