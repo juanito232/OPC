@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Home from './Home.vue'
+import Home from '../pages/Home.vue'
 export default {
     name:'Statistics',
     components:{

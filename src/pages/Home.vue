@@ -1,5 +1,5 @@
 <template>
-    <q-layout>
+    <q-layout >
   <div class="q-pa-md" >
     <q-header elevated class="bg-black">
     <Toolbar/>
@@ -19,8 +19,8 @@
               
               icon="keyboard_arrow_up"
               direction="up">
-              <q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" />
-              <q-fab-action label-position="left" color="red" @click="onClick" icon="mood_bad" label="Gastos" />
+              <router-link to="/income"><q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" /></router-link>
+              <router-link to="/expenses"><q-fab-action label-position="left" color="red" @click="onClick" icon="mood_bad" label="Gastos" /></router-link>
             </q-fab>
           </q-page-sticky>
         </q-page>
@@ -34,21 +34,25 @@
   import Toolbar from '../components/Toolbar.vue'
   import Drawer from '../components/Drawer.vue'
 
-    export default {  
-      components:{
-        Toolbar,
-        Drawer
-      },
-      setup () {
-        return {
-          fabLeft: ref(true),
-          fabCenter: ref(true),
-          fabRight: ref(true),
+  export default {  
+    components:{
+      Toolbar,
+      Drawer
+    },
+    setup () {
+      return {
+        fabLeft: ref(true),
+        fabCenter: ref(true),
+        fabRight: ref(true),
 
-          onClick () {
-            // console.log('Clicked on a fab action')
-          }
+        onClick () {
+          // console.log('Clicked on a fab action')
         }
       }
+    }
 }
 </script>
+
+<style lang="sass" scoped >
+
+</style>

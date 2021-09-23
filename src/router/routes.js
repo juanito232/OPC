@@ -34,5 +34,15 @@ export const routes = [
       path: '/statistics',
       component: () => import('@/pages/Statistics.vue'),
       name: 'statistics'
+    },
+    {
+      path: '/expenses',
+      component: () => import('@/pages/Expenses.vue'),
+      name: 'expenses'      
+    },
+    {
+      path: '/income',
+      component: () => import('@/pages/Income.vue'),
+      name: 'income'      
     }
   ]

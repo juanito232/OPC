@@ -5,7 +5,10 @@
         v-model="drawer"
         show-if-above
 
-        :mini="!drawer || miniState"
+        @mouseover="miniState = false"
+        @mouseout="miniState = true"
+        mini-to-overlay
+        :mini=" miniState"
         @click.capture="drawerClick"
 
         :width="200"
@@ -18,57 +21,53 @@
             <div class="q-py-lg">
               <div class="column items-center">
                 <router-link to="/home"><q-icon name="home" color="white" class="mini-icon" /></router-link>
-                <router-link to="/wallet"><q-icon name="update" color="white" class="mini-icon" /></router-link>
-                <q-icon name="account_balance_wallet" color="white" class="mini-icon" />
-                <q-icon name="auto_graph" color="white" class="mini-icon" />
+                <router-link to="/wallet"><q-icon name="account_balance_wallet" color="white" class="mini-icon" /></router-link>
+                <router-link to="/movements"><q-icon name="update" color="white" class="mini-icon" /></router-link>
+                <router-link to="/Statistics"><q-icon name="auto_graph" color="white" class="mini-icon" /></router-link>
               </div>
             </div>
           </q-scroll-area>
         </template>
 
         <q-scroll-area class="fit" style="color:white;">
-          <q-list padding>
+          <q-list padding >
             <q-item clickable v-ripple active-class="drawer-item-active" @click="goToHome">
-              <q-item-section>
-                Inicio
-              </q-item-section>
+               <q-item-section avatar>
+                <q-icon name="home" class="iconp" />
+                </q-item-section>
+              <q-item-section> Inicio </q-item-section>
             </q-item>
 
             <q-item active clickable v-ripple active-class="drawer-item-active" @click="goToWallet">
+               <q-item-section avatar>
+                <q-icon name="account_balance_wallet" class="iconp"/>
+                </q-item-section>
               <q-item-section>
                 Billetera
               </q-item-section>
             </q-item>
 
             <q-item clickable v-ripple @click="goToMovements">
+                <q-item-section avatar>
+                <q-icon name="update" class="iconp" />
+                </q-item-section>
               <q-item-section>
                 Movimientos
               </q-item-section>
             </q-item>
 
             <q-item clickable v-ripple @click="goToStatistics">
+               <q-item-section avatar>
+                <q-icon name="auto_graph" class="iconp" />
+                </q-item-section>
               <q-item-section>
-                Estadistica
+                Estadisticas
               </q-item-section>
             </q-item>
           </q-list>
         </q-scroll-area>
 
-        <!--
-          in this case, we use a button (can be anything)
-          so that user can switch back
-          to mini-mode
-        -->
-        <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-          <q-btn
-            dense
-            round
-            unelevated
-            color="accent"
-            icon="chevron_left"
-            @click="miniState = true"
-          />
-        </div>
+
       </q-drawer>
 
   </div>
@@ -124,6 +123,12 @@ export default {
 
 .mini-icon
   font-size: 2em
+  size: 2em
+  margin-bottom: 20px
+
+.iconp
+  front-size: 2em
+  size: 2em
 
   & + &
     margin-top: 18px

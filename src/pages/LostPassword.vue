@@ -10,10 +10,10 @@
         <h1 class="estiloTitulo">¿Olvido su contraseña?</h1>
         <div class="inputs">
           <label for="email" class="estiloLabel"> Email </label>
-          <q-input outlined v-model="user.email" lazy-rules :rules="[val=>emailValidation(val) || 'Correo inválido.']" />
+          <q-input outlined v-model="user.email" lazy-rules :rules="[val=>emailValidation(val)]" />
         </div>
         <div>
-          <q-btn type="submit" class="estiloButton" label="Enviar" @click="redireccionLogin" />
+          <q-btn type="submit" class="estiloButton" label="Enviar" @click="redireccionLogin" :disable="disable" />
         </div>
       </q-form>
     </div>
@@ -25,15 +25,24 @@ export default {
   name: "lostPassword",
   data() {
     return {
+      disable: true,
       user: {
-        email: null,
+        email: "",
       },
     };
   },
+
   methods: {
         emailValidation(email) {
       const emailPattern = /[a-z0-9]+(.[_a-z0-9]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,15})/i
+      if (this.user.email.isEmpty || !emailPattern.test(email)) {
+        this.disable = true;
+      }
+      else{
+        this.disable= false
+      }
       return emailPattern.test(email)
+
     },
     redireccionLogin(){
       this.$router.push({name: 'login'})
@@ -41,6 +50,8 @@ export default {
   },
 };
 </script>
+
+
 
 <style scoped>
 img {

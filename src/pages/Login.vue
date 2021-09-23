@@ -10,7 +10,7 @@
       <q-form action="" @submit.prevent="login">
         <h1 class="estiloTitulo">OPC</h1>
         <div class="inputs">
-          <label for="email" class="estiloLabel"> Email </label>
+          <label for="email" class="estiloLabel"> Correo electrónico </label>
           <q-input outlined v-model="user.email" bg-color="grey-1"/>
         </div>
         <div class="inputs">

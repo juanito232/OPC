@@ -1,13 +1,13 @@
 <template>
     <home>
-        <h1>Movements</h1>
+        <h1>Gastos</h1>
     </home>
 </template>
 
 <script>
 import Home from '../pages/Home.vue'
 export default {
-    name:'Movements',
+    name:'Expenses',
     components:{
         Home
     }
