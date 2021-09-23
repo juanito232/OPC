@@ -1,9 +1,9 @@
 export const routes = [
     {
       path: '/home',
-      component: () => import('@/pages/Home.vue'),
+      component: () => import('@/pages/Summary.vue'),
       alias: '/',
-      name: 'home'
+      name: 'summary'
     },
     {
       path: '/login',
@@ -44,5 +44,5 @@ export const routes = [
       path: '/income',
       component: () => import('@/pages/Income.vue'),
       name: 'income'      
-    }
+    },
   ]

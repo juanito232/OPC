@@ -16,7 +16,6 @@
               v-model="fabRight"
               vertical-actions-align="right"
               color="deep-purple-6"
-              
               icon="keyboard_arrow_up"
               direction="up">
               <router-link to="/income"><q-fab-action label-position="left" color="green" @click="onClick" icon="mood" label="Ingresos" /></router-link>
@@ -25,7 +24,6 @@
           </q-page-sticky>
         </q-page>
       </q-page-container>
-
     </q-layout>
   </template>
 
@@ -53,6 +51,3 @@
 }
 </script>
 
-<style lang="sass" scoped >
-
-</style>

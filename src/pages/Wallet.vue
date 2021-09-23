@@ -7,7 +7,7 @@
 <script>
 import Home from '../pages/Home.vue'
 export default {
-    name:'Wallet',
+    name:'wallet',
     components:{
         Home
     }
