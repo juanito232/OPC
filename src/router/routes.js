@@ -45,4 +45,12 @@ export const routes = [
       component: () => import('@/pages/Income.vue'),
       name: 'income'      
     },
+<<<<<<< HEAD
+=======
+    {
+    path: '/requestPassword',
+    component: () => import('@/pages/RequestPassword.vue'),
+    name: 'requestPassword'      
+    }
+>>>>>>> a2c463f283f90184dccee8876c21c0da661a4fcd
   ]
