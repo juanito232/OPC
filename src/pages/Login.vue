@@ -56,7 +56,7 @@ export default {
         console.log(res);
           if (res.data.code == 100){
               this.$route.params.id = res.data.data.id; 
-              this.$router.push('summary')
+              this.$router.push('/home')
           }else{
             console.log("usuario incorrecto",res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')

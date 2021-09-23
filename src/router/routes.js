@@ -1,12 +1,7 @@
 export const routes = [
     {
       path: '/home',
-      component: () => import('@/pages/HomeContent.vue'),
-      alias: '/',
-      name: 'Home-Content'
-    },
-    {
-        component: () => import('@/pages/Summary.vue'),
+      component: () => import('@/pages/Summary.vue'),
       alias: '/',
       name: 'summary'
     },
