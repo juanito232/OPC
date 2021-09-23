@@ -46,8 +46,8 @@ export const routes = [
       name: 'income'      
     },
     {
-    path: '/requestPassword',
-    component: () => import('@/pages/RequestPassword.vue'),
-    name: 'requestPassword'      
+      path: '/requestPassword',
+      component: () => import('@/pages/RequestPassword.vue'),
+      name: 'requestPassword'      
     }
   ]
