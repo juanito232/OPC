@@ -6,14 +6,14 @@
       alt=""
     />
     <div class="form">
-      <q-form action="" @submit.prevent="login">
+      <q-form action="" @submit.prevent="lostPassword">
         <h1 class="estiloTitulo">¿Olvido su contraseña?</h1>
         <div class="inputs">
           <label for="email" class="estiloLabel"> Email </label>
           <q-input outlined v-model="user.email" lazy-rules :rules="[val=>emailValidation(val)]" />
         </div>
         <div>
-          <q-btn type="submit" class="estiloButton" label="Enviar" @click="redireccionLogin" :disable="disable" />
+          <q-btn type="submit" class="estiloButton" label="Enviar" :disable="disable"  />
         </div>
       </q-form>
     </div>
@@ -21,8 +21,9 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
-  name: "lostPassword",
+  name: "LostPassword",  
   data() {
     return {
       disable: true,
@@ -31,8 +32,23 @@ export default {
       },
     };
   },
-
   methods: {
+    lostPassword() {
+      //this.user.password = this.encryptPassword(this.user.password);
+      Axios.post("http://localhost:3000/resetPassword", this.user).then(res=>{
+        console.log(res.code);
+        console.log(res);
+          if (res.data.code == 100){
+              this.$router.push({name:'login'})
+          }else{
+            console.log("Correo incorrecto",res);
+            //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
+          }
+      }).catch((err)=>{
+        console.log("Error",err);
+            //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
+      })
+    },
         emailValidation(email) {
       const emailPattern = /[a-z0-9]+(.[_a-z0-9]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,15})/i
       if (this.user.email.isEmpty || !emailPattern.test(email)) {
