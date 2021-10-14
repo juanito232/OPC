@@ -27,12 +27,14 @@ export default {
             Home
     },
     beforeMount(){
-        console.log("parametro:",this.$route.params.id)
-        this.getIncomes()
+        if(localStorage.getItem("user")){
+            console.log("UserId "+JSON.parse(localStorage.getItem("user")).id);  
+            this.getIncomes(JSON.parse(localStorage.getItem("user")).id);
+        }   
     },
     methods:{
-        getIncomes(){
-            Axios.get('http://localhost:3000/getIncome/'+this.$route.params.id).then(res=>{
+        getIncomes(userId){
+            Axios.get('http://localhost:3000/getIncome/'+userId).then(res=>{
                 console.log(res.code);
                 console.log(res);
                 if (res.data.code == 100){

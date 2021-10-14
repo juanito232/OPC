@@ -2,14 +2,26 @@
     <div class="toolbar">
       <q-toolbar>
         <q-toolbar-title class="title">OPC App</q-toolbar-title>
-        <q-btn flat round dense icon="fas fa-user-circle" class="q-mr-xs" />
+        <q-btn flat round dense icon="fas fa-user-circle" class="q-mr-xs">
+          <q-menu>
+          <q-item clickable v-close-popup>
+              <q-item-section  @click="logout">Cerrar sesion</q-item-section>
+            </q-item>
+        </q-menu>
+      </q-btn>
       </q-toolbar>
     </div>
 </template>
 
 <script>
 export default {
-    name:'Toolbar'
+    name:'Toolbar',
+    methods:{
+      logout(){
+        localStorage.removeItem("user");
+        this.$router.push({path:"/login"})
+      }
+    }
 }
 </script>
 

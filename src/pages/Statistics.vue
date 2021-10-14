@@ -19,6 +19,7 @@ export default ({
 return {
         ingresos: [],
         gastos: [],
+        balance:[],
         series: [{
             name: 'Ingresos',
             type: 'column',
@@ -30,7 +31,7 @@ return {
           }, {
             name: 'Balance',
             type: 'line',
-            data: [20, 29, 37, 36, 44, 45, 50, 58]
+            data: this.balance
           }],
           chartOptions: {
             chart: {

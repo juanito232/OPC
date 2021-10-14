@@ -37,7 +37,7 @@ export default {
         data() {
         return {
             income: {
-                userId: this.$route.params.id,
+                userId: JSON.parse(localStorage.getItem("user")).id,
                 name: "",
                 value: "",
                 date: "",
@@ -46,7 +46,6 @@ export default {
      },
      methods:{
        save(){
-         console.log("Id del usuario: "+this.$route.params.id);
          Axios.post('http://localhost:3000/addIncome/',this.income).then(res=>{
                 console.log(res.code);
                 console.log(res);

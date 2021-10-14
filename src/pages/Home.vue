@@ -51,6 +51,15 @@
           // console.log('Clicked on a fab action')
         }
       }
+    },
+    beforeMount(){
+      if(localStorage.getItem('user')==null){
+            window.location.href = 'http://localhost:8080/OPC/login';
+            return;
+        }
+        else{
+          console.log(localStorage.getItem('user').id);
+        }
     }
 }
 </script>
