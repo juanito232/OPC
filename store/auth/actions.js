@@ -9,11 +9,21 @@ export default {
       );
       if (response.data.code == 100) {
         if (process.client) {
-             context.commit("setAuthToken", { authToken: response.data.authToken });            
+             context.commit("setAuthToken", { authToken: response.data.authToken });         
+             this.$cookies.set("OPC-Auth-Token",response.data.authToken);   
         }
       } else {
         console.log("usuario incorrecto", response);
       }
+    } catch (e) {
+       throw e;
+    }
+  },
+
+  logout(context) {
+    try {
+      context.commit("setAuthToken",{authToken:null});         
+      this.$cookies.set("OPC-Auth-Token",null);   
     } catch (e) {
        throw e;
     }
