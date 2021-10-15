@@ -38,12 +38,10 @@
             <a-button
               type="primary"
               html-type="submit"
-              :disabled="form.email === '' || form.password === ''"
-            >
+              :disabled="form.email === '' || form.password === ''">
               Iniciar sesión
             </a-button>
           </a-form-model-item>
-
           <div>
             <a-form-model-item>
               <a-button type="primary" @click="goToRegister">
