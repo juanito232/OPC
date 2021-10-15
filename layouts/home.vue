@@ -1,6 +1,6 @@
 <template>
 <a-layout id="components-layout-demo-custom-trigger">
-    <Drawer :collapsed="collapsed" :selected="2"/>
+    <Drawer :collapsed="collapsed"/>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
         <div class="header">
@@ -9,7 +9,22 @@
             :type="collapsed ? 'menu-unfold' : 'menu-fold'" 
             @click="() => (collapsed = !collapsed)"
           />
-
+          <div class="options">
+            <a-menu v-model="current" mode="horizontal">
+            <a-sub-menu>
+              <span slot="title" class="submenu-title-wrapper"
+                ><a-icon type="plus-circle" class="trigger"
+              /></span>
+              <a-menu-item-group title="OPC">
+                <a-menu-item key="add-income" @click="$router.push({path:'/add-income'});">
+                  Añadir ingreso
+                </a-menu-item>
+                <a-menu-item key="add-expense" @click="$router.push({path:'/add-expense'});">
+                  Añadir gasto
+                </a-menu-item>
+              </a-menu-item-group>
+            </a-sub-menu>
+          </a-menu>
           <a-menu v-model="current" mode="horizontal">
             <a-sub-menu>
               <span slot="title" class="submenu-title-wrapper"
@@ -22,6 +37,8 @@
               </a-menu-item-group>
             </a-sub-menu>
           </a-menu>
+          </div>
+          
         </div>
       </a-layout-header>
       <a-layout-content
@@ -67,5 +84,9 @@ export default {
 .header {
   display: flex;
   justify-content: space-between;
+}
+
+.options{
+  display: flex;
 }
 </style>

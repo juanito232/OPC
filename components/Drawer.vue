@@ -22,6 +22,17 @@
 export default {
     name:'Drawer',
     props:['collapsed'],
+    methods:{
+      getClassIfSelected(){
+        console.log(this.$route.path);
+        if(this.$route.path=="/movements"){
+           return '2';
+        }
+        else{
+          return '1';
+        }
+      }
+    }
 }
 </script>
 

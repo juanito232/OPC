@@ -5,4 +5,4 @@ export default function ({app,store,redirect}) {
         else{
             console.log("authenticated");
         }
-  }
+  } 
