@@ -25,6 +25,7 @@
 <script>
 import Drawer from '../components/Drawer.vue';
 export default {
+  middleware: 'auth',
   components: {
       Drawer
   },

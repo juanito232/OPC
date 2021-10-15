@@ -11,7 +11,7 @@
         ref="ruleForm"
         :rules="rules"
         :model="form"
-        @submit="login"
+        @submit="login2"
         @submit.native.prevent
       >
         <a-form-model-item prop="email">
@@ -38,7 +38,8 @@
             <a-button
               type="primary"
               html-type="submit"
-              :disabled="form.email === '' || form.password === ''">
+              :disabled="form.email === '' || form.password === ''"
+            >
               Iniciar sesión
             </a-button>
           </a-form-model-item>
@@ -56,10 +57,10 @@
 </template>
 
 <script>
-import Axios from "axios";
+import { mapActions } from "vuex";
 export default {
   name: "Login",
-  emit: ["login"],
+  middleware: 'login',
   data() {
     let validateEmail = (rule, value, callback) => {
       if (
@@ -94,30 +95,19 @@ export default {
       }
     };
   },
-   methods: {
-    login() {
+  methods: {
+    ...mapActions("auth", {
+      tryLogin: "login"
+    }),
+    login2() {
       this.$refs["ruleForm"].validate(valid => {
         if (valid) {
-          Axios.post("http://localhost:3000/login/", this.form)
+          this.tryLogin({ data: this.form })
             .then(res => {
-              console.log(res.code);
-              console.log(res);
-              if (res.data.code == 100) {
-                if (process.client) {
-                  localStorage.setItem(
-                    "user",
-                    JSON.stringify({ id: res.data.data.id })
-                  );
-                  this.$router.go();
-                }
-              } else {
-                console.log("usuario incorrecto", res);
-                //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
-              }
+              this.$router.push({path:'/'});
             })
-            .catch(err => {
-              console.log("Error", err);
-              //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
+            .catch(e => {
+              console.log(e);
             });
         } else {
           console.log("error submit!!");
@@ -128,7 +118,7 @@ export default {
     goToRegister() {
       this.$router.push({ path: "/register" });
     }
-  },
+  }
 };
 </script>
 
