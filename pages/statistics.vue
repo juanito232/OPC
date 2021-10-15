@@ -1,15 +1,14 @@
 <template>
-  <client-only>
     <div>
       <VueApexCharts
       type="line" height="350" :options="chartOptions" :series="series"
       ></VueApexCharts>
     </div>
-  </client-only>
 </template>
 
 <script>
 export default {
+  layout: 'home', 
   components: {
     VueApexCharts: () => import('vue-apexcharts')
   },

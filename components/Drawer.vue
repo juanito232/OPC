@@ -2,17 +2,17 @@
     <a-layout-sider :style="{minHeight:'200vh'}" v-model="collapsed" :trigger="null" collapsible>
       <div class="logo" />
       <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
-        <a-menu-item key="1">
+        <a-menu-item key="1"  @click="$router.push({path:'/'})">
           <a-icon type="user" />
-          <span>nav 1</span>
+          <span>Inicio</span>
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="2" @click="$router.push({path:'/movements'})">
           <a-icon type="video-camera" />
-          <span>nav 2</span>
+          <span>Movimientos</span>
         </a-menu-item>
-        <a-menu-item key="3">
+        <a-menu-item key="3" @click="$router.push({path:'/statistics'})">
           <a-icon type="upload" />
-          <span>nav 3</span>
+          <span>Statistics</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>

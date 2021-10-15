@@ -1,5 +1,5 @@
 <template>
- <h1>HOME</h1>
+ <h1>MOVEMENTS</h1>
 </template>
 
 <script>
