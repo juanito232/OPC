@@ -10,7 +10,6 @@
 
    <q-page-container>
         <q-page class="q-px-lg q-py-md">
-          <slot></slot>
           <q-page-sticky position="bottom-right" :offset="[18, 18]">
             <q-fab
               v-model="fabRight"

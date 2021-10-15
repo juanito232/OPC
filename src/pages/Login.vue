@@ -1,6 +1,6 @@
 <template>
   <q-layout
-    style="background: linear-gradient(90deg, rgba(144,111,195,1) 0%, rgba(100,223,223,0.6292892156862745) 100%, rgba(105,48,195,0.5032387955182073) 100%);"
+    style="background: #  "
   >
     <img class="estiloImagen" src="@/assets/logoCerdito2.png" alt="" />
     <div class="form">
@@ -41,14 +41,13 @@
           <a
             href="#"
             class="estiloLink"
-            outline
             @click="redireccionLostPassword"
           >
             ¿Olvidó su contraseña?
           </a>
         </div>
         <div>
-          <q-btn type="submit" class="estiloButton" label="Iniciar sesión" />
+          <q-btn type="submit" class="estiloButton" outline label="Iniciar sesión" />
           <q-btn
             type="submit"
             class="estiloButton2"
@@ -77,13 +76,11 @@ export default {
     };
   },
   beforeMount(){
-    if(localStorage.getItem('user')!=null){
+    if(localStorage.getItem('user')){
             window.location.href = 'http://localhost:8080/OPC/';
             return;
         }
-        else{
-          console.log(localStorage.getItem('user').id);
-        }
+      
   },
   methods: {
     login() {
@@ -168,21 +165,21 @@ button {
   text-align: start;
 }
 .estiloButton {
-  background-color: #6930c3;
-  color: #ffffff;
+  background-color: #6EC267;
+  color: #6EC267;
   margin: 5px;
   margin-bottom: 2.5%;
-  box-shadow: 1px 1px 1px grey;
+  box-shadow: 0px 0px 0px #5fa559;
 }
 .estiloButton2 {
-  background-color: #ffffff;
+  background-color: #6EC267;
   color: #6930c3;
   margin: 5px;
   margin-bottom: 2.5%;
-  box-shadow: 1px 1px 1px grey;
+  box-shadow: 0px 0px px grey;
 }
 .estiloLabel {
-  color: #595959;
+  color: #000;
   font-size: 19px;
   font-weight: bold;
   margin-right: 10px;
@@ -190,6 +187,8 @@ button {
 .estiloTitulo {
   margin: 0 auto;
   font-size: 65px;
+  color:#6EC267;
+  font-weight: bold;
 }
 .estiloLink {
   font-size: 17px;
