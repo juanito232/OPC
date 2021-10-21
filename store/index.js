@@ -1,9 +1,12 @@
-export const state = () => ({
-    counter: 0
-  })
-  
-  export const mutations = {
-    increment(state) {
-      state.counter++
-    }
-  }
+import mutations from './mutations';
+import getters from './getters';
+import actions from './actions';
+
+export default {
+  state(){
+    return {loading:false};
+  },
+  mutations,
+  getters,
+  actions
+}
