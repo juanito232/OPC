@@ -14,6 +14,9 @@
         @submit="login2"
         @submit.native.prevent
       >
+      <span>Ingrese su correo y contraseña: {{ msg }}</span>
+      <pre></pre>
+      <pre></pre>
         <a-form-model-item prop="email">
           <a-input
             v-model="form.email"
@@ -47,6 +50,11 @@
             <a-form-model-item>
               <a-button type="primary" @click="goToRegister">
                 Registrarse
+              </a-button>
+            </a-form-model-item>
+            <a-form-model-item>
+              <a-button type="primary" @click="goToRequestPassword">
+                ¿Olvido su contraseña?
               </a-button>
             </a-form-model-item>
           </div>
@@ -117,6 +125,9 @@ export default {
     },
     goToRegister() {
       this.$router.push({ path: "/register" });
+    },
+    goToRequestPassword() {
+      this.$router.push({ path: "/requestPassword" });
     }
   }
 };

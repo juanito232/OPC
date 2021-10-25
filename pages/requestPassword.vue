@@ -11,17 +11,12 @@
         ref="ruleForm"
         :rules="rules"
         :model="form"
-        @submit="register"
+        @submit="requestPassword"
         @submit.native.prevent
       >
-      <span>Registro: {{ msg }}</span>
+      <span>Ingrese su correo para recuperar su contraseña: {{ msg }}</span>
       <pre></pre>
       <pre></pre>
-        <a-form-model-item prop="name">
-          <a-input v-model="form.name" placeholder="Nombre" size="large">
-            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-model-item>
         <a-form-model-item prop="email">
           <a-input
             v-model="form.email"
@@ -31,32 +26,12 @@
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
           </a-input>
         </a-form-model-item>
-        <a-form-model-item prop="password">
-          <a-input
-            v-model="form.password"
-            type="password"
-            placeholder="Contraseña"
-            size="large"
-          >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-model-item>
-        <a-form-model-item prop="repeatPassword">
-          <a-input
-            v-model="form.repeatPassword"
-            type="password"
-            placeholder="Repetir contraseña"
-            size="large"
-          >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-model-item>
         <a-form-model-item>
             <a-button
               type="primary"
               html-type="submit"
             >
-              Register
+              Enviar
             </a-button>
           </a-form-model-item>
       </a-form-model>
