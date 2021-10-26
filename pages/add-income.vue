@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     onDateChange(date) {
-      this.date = date;
+      this.income.date = date;
     },
     onChange(value) {
       this.income.value=value    

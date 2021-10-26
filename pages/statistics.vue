@@ -7,21 +7,43 @@
 </template>
 
 <script>
+import Axios from "axios";
+
 export default {
   layout: 'home', 
   components: {
     VueApexCharts: () => import('vue-apexcharts')
+  },
+  beforeMount(){
+    console.log('holis');
+    Axios({
+        method:'get',
+        url:"http://localhost:3000/getData",
+        headers:{
+          'OPC-Auth-Token':this.$store.getters['auth/authToken']
+        }
+      }).then((result)=>{
+        if (result.data.code == 100){
+          console.log(result.data.data.income);
+          console.log(result.data.data.expenses);
+          this.series[0].data = result.data.data.income;
+          this.series[1].data = result.data.data.expenses;
+        }
+        else{
+          console.log("error");
+        }
+      }).catch((error)=>{console.log(error)});
   },
   data() {
     return {
       series: [{
             name: 'Ingresos',
             type: 'column',
-            data: this.ingresos
+            data: []
           }, {
             name: 'Gastos',
             type: 'column',
-            data: this.gastos
+            data: []
           }, {
             name: 'Balance',
             type: 'line',
