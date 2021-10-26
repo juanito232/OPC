@@ -28,6 +28,7 @@ export default {
           console.log(result.data.data.expenses);
           this.series[0].data = result.data.data.income;
           this.series[1].data = result.data.data.expenses;
+          window.dispatchEvent(new Event('resize'));
         }
         else{
           console.log("error");
