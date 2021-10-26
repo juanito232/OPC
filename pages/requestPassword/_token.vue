@@ -11,124 +11,99 @@
         ref="ruleForm"
         :rules="rules"
         :model="form"
-        @submit="login2"
+        @submit="requestPassword"
         @submit.native.prevent
       >
-      <span>Ingrese su correo y contraseña: {{ msg }}</span>
+      <span>Ingrese su nueva contraseña: {{ msg }}</span>
       <pre></pre>
       <pre></pre>
-        <a-form-model-item prop="email">
-          <a-input
-            v-model="form.email"
-            placeholder="Correo electrónico"
-            size="large"
-          >
-            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
-          </a-input>
-        </a-form-model-item>
         <a-form-model-item prop="password">
           <a-input
             v-model="form.password"
-            type="password"
             placeholder="Contraseña"
             size="large"
+            type="password"
           >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
+            <a-icon slot="prefix" type="password" style="color:rgba(0,0,0,.25)" />
           </a-input>
-          <a-form-model-item>
-              <a @click="goToLostPassword">
-                ¿Olvido su contraseña?
-              </a>
-            </a-form-model-item>
         </a-form-model-item>
-        <div class="buttons">
-          <a-form-model-item>
+        <a-form-model-item prop="repetPassword">
+          <a-input
+            v-model="form.repetpassword"
+            placeholder="Repetir Contraseña"
+            size="large"
+            type="password"
+          >
+            <a-icon slot="prefix" type="password" style="color:rgba(0,0,0,.25)" />
+          </a-input>
+        </a-form-model-item>
+        <a-form-model-item>
             <a-button
               type="primary"
               html-type="submit"
-              :disabled="form.email === '' || form.password === ''"
             >
-              Iniciar sesión
+              Enviar
             </a-button>
           </a-form-model-item>
-          <div>
-            <a-form-model-item>
-              <a-button type="primary" @click="goToRegister">
-                Registrarse
-              </a-button>
-            </a-form-model-item>
-          </div>
-        </div>
       </a-form-model>
     </div>
   </a-layout>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import Axios from "axios"
 export default {
-  name: "Login",
-  middleware: 'login',
+  name: "requestPassword",
   data() {
-    let validateEmail = (rule, value, callback) => {
-      if (
-        !/[a-z0-9]+(.[_a-z0-9]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,15})/i.test(
-          value
-        )
-      ) {
-        callback(new Error("Por favor ingrese un email valida"));
-      } else {
-        callback();
-      }
-    };
-    let validatePass = (rule, value, callback) => {
-      if (!/[A-Z]/.test(value)) {
-        callback(new Error("La contraseña debe tener al menos una mayúscula."));
-      } else if (!/[0-9]/.test(value)) {
-        callback(new Error("La contraseña debe tener al menos un número."));
-      } else if (!/.{6,}/.test(value)) {
-        callback(new Error("La contraseña debe tener mínimo 6 caracteres."));
-      } else {
-        callback();
-      }
-    };
     return {
       form: {
-        email: "",
-        password: ""
+        password: "",
       },
-      rules: {
-        email: [{ validator: validateEmail, trigger: "change" }],
-        password: [{ validator: validatePass, trigger: "change" }]
-      }
+      confirmPass: "",
     };
   },
+
   methods: {
-    ...mapActions("auth", {
-      tryLogin: "login"
-    }),
-    login2() {
-      this.$refs["ruleForm"].validate(valid => {
-        if (valid) {
-          this.tryLogin({ data: this.form })
-            .then(res => {
-              this.$router.push({path:'/'});
-            })
-            .catch(e => {
-              console.log(e);
-            });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+    numPasswordValidation(password) {
+      const numPattern = /[0-9]/
+      return numPattern.test(password)
     },
-    goToRegister() {
-      this.$router.push({ path: "/register" });
+    lengthPasswordValidation(password) {
+      const lengthPattern = /.{6,}/
+      return lengthPattern.test(password)
     },
-    goToLostPassword() {
-      this.$router.push({ path: "/lostPassword" });
-    }
+    mayusPasswordValidation(password) {
+      const mayusPattern = /[A-Z]/
+      return mayusPattern.test(password)
+    },
+    confirmPassword(password) {
+      return this.user.password.toString() === password.toString()
+    },
+    redireccionLogin(){
+      this.$router.push({name: 'login'})
+    },
+    requestPassword() {
+     
+  },
+  beforeMount(){
+     //this.user.password = this.encryptPassword(this.user.password);
+     console.log("hola ptos")
+     console.log(this.$route.params.token)
+     Axios.post("http://localhost:3000/checkToken", {resetToken: this.$route.params.token}).then(res=>{
+        console.log(res.code);
+        console.log(res);
+          if (res.data.code == 100){
+            console.log("token")
+          }else{
+            window.location.href = "/error";;
+            console.log("No se pudo actualizar",res);
+            //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
+          }
+      }).catch((err)=>{
+        console.log("Error",err);
+            //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
+      })
+    },
   }
 };
 </script>

@@ -42,72 +42,46 @@
 <script>
 import Axios from "axios";
 export default {
-  name: "Register",
+  name: "LostPassword",  
   data() {
-    let validateEmail = (rule, value, callback) => {
-      if (
-        !/[a-z0-9]+(.[_a-z0-9]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,15})/i.test(
-          value
-        )
-      ) {
-        callback(new Error("Por favor ingrese un email valida"));
-      } else {
-        callback();
-      }
-    };
-    let validatePass = (rule, value, callback) => {
-      if (!/[A-Z]/.test(value)) {
-        callback(new Error("La contraseña debe tener al menos una mayúscula."));
-      } else if (!/[0-9]/.test(value)) {
-        callback(new Error("La contraseña debe tener al menos un número."));
-      } else if (!/.{6,}/.test(value)) {
-        callback(new Error("La contraseña debe tener mínimo 6 caracteres."));
-      } else {
-        callback();
-      }
-    };
-    let validateRepeatPass = (rule, value, callback) => {
-      callback();
-    };
     return {
+      disable: true,
       form: {
         email: "",
-        password: "",
-        repeatPassword: "",
-        name: ""
       },
-      rules: {
-        email: [{ validator: validateEmail, trigger: "change" }],
-        password: [{ validator: validatePass, trigger: "change" }],
-        repeatPassword: [{ validator: validateRepeatPass, trigger: "change" }]
-      }
     };
   },
-   methods: {
-    register() {
-      this.$refs["ruleForm"].validate(valid => {
-        if (valid) {
-          Axios.post("http://localhost:3000/registry/", this.form)
-            .then(res => {
-              console.log(res.code);
-              console.log(res);
-              if (res.data.code == 100) {
-                this.$router.push({path:'/'});
-              } else {
-                console.log("usuario incorrecto", res);
-                //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
-              }
-            })
-            .catch(err => {
-              console.log("Error", err);
-              //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
-            });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    }
+  methods: {
+    requestPassword() {
+      //this.user.password = this.encryptPassword(this.user.password);
+      Axios.post("http://localhost:3000/resetPassword", this.form).then(res=>{
+        console.log(res.code);
+        console.log(res);
+          if (res.data.code == 100){
+              this.$router.push({name:'login'})
+          }else{
+            console.log("Correo incorrecto",res);
+            //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
+          }
+      }).catch((err)=>{
+        console.log("Error",err);
+            //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
+      })
+    },
+        emailValidation(email) {
+      const emailPattern = /[a-z0-9]+(.[_a-z0-9]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,15})/i
+      if (this.user.email.isEmpty || !emailPattern.test(email)) {
+        this.disable = true;
+      }
+      else{
+        this.disable= false
+      }
+      return emailPattern.test(email)
+
+    },
+    redireccionLogin(){
+      this.$router.push({name: 'login'})
+    },
   },
 };
 </script>
