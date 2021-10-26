@@ -14,9 +14,9 @@
         @submit="requestPassword"
         @submit.native.prevent
       >
-      <span>Ingrese su nueva contraseña: {{ msg }}</span>
-      <pre></pre>
-      <pre></pre>
+        <span>Ingrese su nueva contraseña:</span>
+        <pre></pre>
+        <pre></pre>
         <a-form-model-item prop="password">
           <a-input
             v-model="form.password"
@@ -24,7 +24,11 @@
             size="large"
             type="password"
           >
-            <a-icon slot="prefix" type="password" style="color:rgba(0,0,0,.25)" />
+            <a-icon
+              slot="prefix"
+              type="password"
+              style="color:rgba(0,0,0,.25)"
+            />
           </a-input>
         </a-form-model-item>
         <a-form-model-item prop="repetPassword">
@@ -34,76 +38,97 @@
             size="large"
             type="password"
           >
-            <a-icon slot="prefix" type="password" style="color:rgba(0,0,0,.25)" />
+            <a-icon
+              slot="prefix"
+              type="password"
+              style="color:rgba(0,0,0,.25)"
+            />
           </a-input>
         </a-form-model-item>
         <a-form-model-item>
-            <a-button
-              type="primary"
-              html-type="submit"
-            >
-              Enviar
-            </a-button>
-          </a-form-model-item>
+          <a-button type="primary" html-type="submit">
+            Enviar
+          </a-button>
+        </a-form-model-item>
       </a-form-model>
     </div>
   </a-layout>
 </template>
 
 <script>
-import Axios from "axios"
+import Axios from "axios";
 export default {
   name: "requestPassword",
   data() {
     return {
       form: {
-        password: "",
+        password: ""
       },
-      confirmPass: "",
+      confirmPass: ""
     };
   },
-
   methods: {
     numPasswordValidation(password) {
-      const numPattern = /[0-9]/
-      return numPattern.test(password)
+      const numPattern = /[0-9]/;
+      return numPattern.test(password);
     },
     lengthPasswordValidation(password) {
-      const lengthPattern = /.{6,}/
-      return lengthPattern.test(password)
+      const lengthPattern = /.{6,}/;
+      return lengthPattern.test(password);
     },
     mayusPasswordValidation(password) {
-      const mayusPattern = /[A-Z]/
-      return mayusPattern.test(password)
+      const mayusPattern = /[A-Z]/;
+      return mayusPattern.test(password);
     },
     confirmPassword(password) {
-      return this.user.password.toString() === password.toString()
+      return this.user.password.toString() === password.toString();
     },
-    redireccionLogin(){
-      this.$router.push({name: 'login'})
+    redireccionLogin() {
+      this.$router.push({ name: "login" });
     },
     requestPassword() {
-     
-  },
-  beforeMount(){
-     //this.user.password = this.encryptPassword(this.user.password);
-     console.log("hola ptos")
-     console.log(this.$route.params.token)
-     Axios.post("http://localhost:3000/checkToken", {resetToken: this.$route.params.token}).then(res=>{
-        console.log(res.code);
-        console.log(res);
-          if (res.data.code == 100){
-            console.log("token")
-          }else{
-            window.location.href = "/error";;
-            console.log("No se pudo actualizar",res);
+      Axios.post("http://localhost:3000/changePassword", {
+        token: this.$route.params.token,
+        newPassword:this.form.password
+      })
+        .then(res => {
+          console.log(res.code);
+          console.log(res);
+          if (res.data.code == 100) {
+            this.$router.push({path:'/login'});
+          } else {
+            window.location.href = "/error";
+            console.log("No se pudo actualizar", res);
             //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
           }
-      }).catch((err)=>{
-        console.log("Error",err);
-            //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
+        })
+        .catch(err => {
+          //console.log("Error", err);
+          window.location.href = "/error";
+          //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
+        });
+    }
+  },
+  beforeMount() {
+    Axios.post("http://localhost:3000/checkToken", {
+      token: this.$route.params.token
+    })
+      .then(res => {
+        console.log(res.code);
+        console.log(res);
+        if (res.data.code == 100) {
+          console.log("token");
+        } else {
+          window.location.href = "/error";
+          console.log("No se pudo actualizar", res);
+          //this.notify('negative', "Usuario y/o contraseña no válidos", 'top')
+        }
       })
-    },
+      .catch(err => {
+        console.log("Error", err);
+        window.location.href = "/error";
+        //this.notify('negative', "Error, inténtelo de nuevo más tarde", 'top')
+      });
   }
 };
 </script>
