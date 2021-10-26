@@ -21,7 +21,7 @@
             </template>
             <a-card-meta :title="item.name" :value="item.description">
             </a-card-meta>
-            <a-card-meta :title="item.value" :value="item.value"> </a-card-meta>
+            <a-card-meta :title="'$ '+item.value" :value="'$ '+item.value"> </a-card-meta>
           </a-card>
         </a-list-item>
       </a-list>
@@ -45,7 +45,7 @@
             </template>
             <a-card-meta :title="item.name" :description="item.description">
             </a-card-meta>
-            <a-card-meta :title="item.value" :value="'\$'+item.value">
+            <a-card-meta :title="'$ '+item.value" :value="'$ '+item.value">
             </a-card-meta>
           </a-card>
         </a-list-item>
