@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 style="font-size: 2rem;">Añadir gasto</h1>
+    <h1 style="font-size: 2rem">Añadir gasto</h1>
     <div class="form">
       <a-form-model
         ref="ruleForm"
@@ -11,27 +11,39 @@
       >
         <a-form-model-item prop="name">
           <a-input v-model="expense.name" placeholder="Nombre" size="large">
-            <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
+            <a-icon
+              slot="prefix"
+              type="user"
+              style="color: rgba(0, 0, 0, 0.25)"
+            />
           </a-input>
         </a-form-model-item>
         <a-form-model-item prop="value">
-          <a-input
-            v-model="expense.value"
-            type="number"
+          <a-input-number
             placeholder="Valor"
+            :formatter="
+              (value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            "
+            :parser="(value) => value.replace(/\$\s?|(,*)/g, '')"
+            @change="onChange"
             size="large"
+            style="width: 60%"
           >
-            <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-          </a-input>
+            <a-icon
+              slot="prefix"
+              type="lock"
+              style="color: rgba(0, 0, 0, 0.25)"
+            />
+          </a-input-number>
         </a-form-model-item>
         <a-date-picker
-          style="margin-bottom:2em;"
+          style="margin-bottom: 2em"
           @change="onDateChange"
           placeholder="Fecha"
           size="large"
         />
         <a-textarea
-          style="margin-bottom:2em;"
+          style="margin-bottom: 2em"
           placeholder="Descripcion"
           :rows="4"
           size="large"
@@ -64,24 +76,27 @@ export default {
         name: "",
         value: "",
         date: "",
-        description: ""
-      }
+        description: "",
+      },
     };
   },
   methods: {
-    onDateChange(date) {
-      this.date = date;
+    onDateChange(date, dateString) {
+      this.expense.date = dateString;
+    },
+    onChange(value) {
+      this.expense.value = value;
     },
     save() {
       Axios({
-        method:'post',
-        url:"http://localhost:3000/addExpense/",
-        data:this.expense,
-        headers:{
-          'OPC-Auth-Token':this.$store.getters['auth/authToken']
-        }
+        method: "post",
+        url: "http://localhost:3000/addExpense/",
+        data: this.expense,
+        headers: {
+          "OPC-Auth-Token": this.$store.getters["auth/authToken"],
+        },
       })
-        .then(res => {
+        .then((res) => {
           console.log(res.code);
           console.log(res);
           if (res.data.code == 100) {
@@ -91,11 +106,11 @@ export default {
             console.log("Error", res);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error", err);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

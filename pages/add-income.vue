@@ -21,11 +21,13 @@
         <a-form-model-item prop="value">
           <a-input-number
             placeholder="Valor"
-            :formatter="(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+            :formatter="
+              (value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            "
             :parser="(value) => value.replace(/\$\s?|(,*)/g, '')"
             @change="onChange"
             size="large"
-            style="width:60%;"
+            style="width: 60%"
           >
             <a-icon
               slot="prefix"
@@ -35,6 +37,7 @@
           </a-input-number>
         </a-form-model-item>
         <a-date-picker
+          format="YYYY-MM-DD"
           style="margin-bottom: 2em"
           @change="onDateChange"
           placeholder="Fecha"
@@ -79,11 +82,11 @@ export default {
     };
   },
   methods: {
-    onDateChange(date) {
-      this.income.date = date;
+    onDateChange(date, dateString) {
+      this.income.date = dateString;
     },
     onChange(value) {
-      this.income.value=value    
+      this.income.value = value;
     },
     save() {
       Axios({

@@ -13,14 +13,15 @@
                   <a-icon key="ellipsis" type="ellipsis" />
                 </a>
                 <a-menu slot="overlay">
-                  <a-menu-item key="0"  @click="deleteIncome(item.id)">
+                  <a-menu-item key="0" @click="deleteIncome(item.id)">
                     Eliminar
                   </a-menu-item>
                 </a-menu>
               </a-dropdown>
             </template>
-            <a-card-meta :title="item.name" :description="item.description">
+            <a-card-meta :title="item.name" :value="item.description">
             </a-card-meta>
+            <a-card-meta :title="item.value" :value="item.value"> </a-card-meta>
           </a-card>
         </a-list-item>
       </a-list>
@@ -44,6 +45,8 @@
             </template>
             <a-card-meta :title="item.name" :description="item.description">
             </a-card-meta>
+            <a-card-meta :title="item.value" :value="'\$'+item.value">
+            </a-card-meta>
           </a-card>
         </a-list-item>
       </a-list>
@@ -61,7 +64,7 @@ export default {
   data() {
     return {
       incomes: [],
-      expenses: []
+      expenses: [],
     };
   },
   beforeMount() {
@@ -75,10 +78,10 @@ export default {
         method: "get",
         url: "http://localhost:3000/getAllIncomes/",
         headers: {
-          "OPC-Auth-Token": this.$store.getters["auth/authToken"]
-        }
+          "OPC-Auth-Token": this.$store.getters["auth/authToken"],
+        },
       })
-        .then(res => {
+        .then((res) => {
           console.log(res.code);
           console.log(res);
           this.$store.commit("setLoading", false);
@@ -89,20 +92,20 @@ export default {
             console.log("Error", res);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.$store.commit("setLoading", false);
           console.log("Error", err);
         });
     },
-    deleteIncome(id){
-        Axios({
+    deleteIncome(id) {
+      Axios({
         method: "post",
-        url: "http://localhost:3000/deleteIncome/"+id,
+        url: "http://localhost:3000/deleteIncome/" + id,
         headers: {
-          "OPC-Auth-Token": this.$store.getters["auth/authToken"]
-        }
+          "OPC-Auth-Token": this.$store.getters["auth/authToken"],
+        },
       })
-        .then(res => {
+        .then((res) => {
           console.log(res.code);
           console.log(res);
           if (res.data.code == 100) {
@@ -111,19 +114,19 @@ export default {
             console.log("Error", res);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error", err);
         });
     },
-    deleteExpense(id){
-        Axios({
+    deleteExpense(id) {
+      Axios({
         method: "post",
-        url: "http://localhost:3000/deleteExpense/"+id,
+        url: "http://localhost:3000/deleteExpense/" + id,
         headers: {
-          "OPC-Auth-Token": this.$store.getters["auth/authToken"]
-        }
+          "OPC-Auth-Token": this.$store.getters["auth/authToken"],
+        },
       })
-        .then(res => {
+        .then((res) => {
           console.log(res.code);
           console.log(res);
           if (res.data.code == 100) {
@@ -132,7 +135,7 @@ export default {
             console.log("Error", res);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error", err);
         });
     },
@@ -141,10 +144,10 @@ export default {
         method: "get",
         url: "http://localhost:3000/getExpenses/",
         headers: {
-          "OPC-Auth-Token": this.$store.getters["auth/authToken"]
-        }
+          "OPC-Auth-Token": this.$store.getters["auth/authToken"],
+        },
       })
-        .then(res => {
+        .then((res) => {
           console.log(res.code);
           console.log(res);
           if (res.data.code == 100) {
@@ -154,11 +157,11 @@ export default {
             console.log("Error", res);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("Error", err);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
