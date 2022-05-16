@@ -13,7 +13,7 @@
 <script>
 import Axios from 'axios';
 export default {
-  layout: "home",
+  layout: "home", 
   data() {
     return {
       data: {
