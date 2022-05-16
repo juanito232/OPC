@@ -44,9 +44,10 @@ export default {
     'cookie-universal-nuxt',
   ],
 
-  server: {
-    port: 8080 // default: localhost
-  },
+  // server: {
+  //   port: 8080, // default: localhost,
+  //   host:0
+  // },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
