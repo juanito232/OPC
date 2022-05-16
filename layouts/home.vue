@@ -10,7 +10,7 @@
             @click="() => (collapsed = !collapsed)"
           />
           <div class="options">
-            <a-menu v-model="current" mode="horizontal">
+            <a-menu  mode="horizontal">
             <a-sub-menu>
               <span slot="title" class="submenu-title-wrapper"
                 ><a-icon type="plus-circle" class="trigger"
@@ -25,7 +25,7 @@
               </a-menu-item-group>
             </a-sub-menu>
           </a-menu>
-          <a-menu v-model="current" mode="horizontal">
+          <a-menu  mode="horizontal">
             <a-sub-menu>
               <span slot="title" class="submenu-title-wrapper"
                 ><a-icon type="account-book" class="trigger"

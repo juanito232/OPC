@@ -112,11 +112,12 @@ export default {
     register() {
       this.$refs["ruleForm"].validate(valid => {
         if (valid) {
-          Axios.post("http://localhost:3000/registry/", this.form)
+          Axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB6toY5XdIsTpA4pl6YcJZn6pTEp0jJKPs", this.form)
             .then(res => {
-              console.log(res.code);
               console.log(res);
-              if (res.data.code == 100) {
+              console.log(res.status);
+              if (res.status>=200 && res.status<300) {
+                console.log("registrado")
                 this.$router.push({path:'/'});
               } else {
                 console.log("usuario incorrecto", res);

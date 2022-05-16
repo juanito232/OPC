@@ -101,7 +101,7 @@ export default {
           console.log(res);
           if (res.data.code == 100) {
             console.log("OK");
-            this.$router.push({ path: "/movements" });
+            this.$router.push({ path: "/crops" });
           } else {
             console.log("Error", res);
           }

@@ -6,9 +6,9 @@
           <a-icon type="user" />
           <span>Inicio</span>
         </a-menu-item>
-        <a-menu-item key="2" @click="$router.push({path:'/movements'})">
+        <a-menu-item key="2" @click="$router.push({path:'/crops'})">
           <a-icon type="video-camera" />
-          <span>Movimientos</span>
+          <span>Cultivos</span>
         </a-menu-item>
         <a-menu-item key="3" @click="$router.push({path:'/statistics'})">
           <a-icon type="upload" />
